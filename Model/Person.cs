@@ -2,18 +2,18 @@ namespace RestASPNET.Api.Model;
 
 public class Person
 {
-    public int Id { get; set; }
-    public string FirstName { get; set; } = string.Empty;
-    public string LastName { get; set; } = string.Empty;
-    public string Address { get; set; } = string.Empty;
-    public string Gender { get; set; } = string.Empty;
+    public int Id { get; private set; }
+    public string FirstName { get; private set; } = string.Empty;
+    public string LastName { get; private set; } = string.Empty;
+    public string Address { get; private set; } = string.Empty;
+    public string Gender { get; private set; } = string.Empty;
 
-    public Person(int id, string firstName, string lastName, string adress, string gender)
+    public Person(int id, string firstName, string lastName, string address, string gender)
     {
         Id = id;
         FirstName = firstName;
         LastName = lastName;
-        Address = adress;
+        Address = address;
         Gender = gender;
     }
 }

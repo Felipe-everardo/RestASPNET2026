@@ -1,3 +1,4 @@
+using RestASPNET.Api.Data;
 using RestASPNET.Api.Exceptions;
 using RestASPNET.Api.Model;
 
@@ -5,22 +6,23 @@ namespace RestASPNET.Api.Services;
 
 public class PersonService : IPersonService
 {
-    private static readonly List<Person> _pessoa = new List<Person>() 
+    private readonly RestContext _context;
+
+    public PersonService(RestContext restContext)
     {
-        new Person (1, "felipe", "Everardo", "123", "male"),
-        new Person (2, "Fabrício", "Everardo", "123", "male")
-    };
+        _context = restContext;
+    }
 
     public List<Person> FindAll()
     {
-         var listaPessoas = _pessoa.ToList();
+         var listaPessoas = _context.People.ToList();
 
          return listaPessoas;
     }
 
     public Person FindById(int id)
     {
-        var pessoaRecuperada = _pessoa.FirstOrDefault(x => x.Id == id);
+        var pessoaRecuperada = _context.People.FirstOrDefault(x => x.Id == id);
         
         if (pessoaRecuperada is null)
         {
