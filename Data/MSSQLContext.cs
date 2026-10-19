@@ -3,14 +3,14 @@ using RestASPNET.Api.Model;
 
 namespace RestASPNET.Api.Data;
 
-public class RestContext : DbContext
+public class MSSQLContext : DbContext
 {
-    public RestContext (DbContextOptions<RestContext> options)
+    public MSSQLContext (DbContextOptions<MSSQLContext> options)
         : base(options)
     {
     }
 
-    public DbSet<Person> People { get; set;}
+    public DbSet<Person> Persons { get; set;}
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

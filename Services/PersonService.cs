@@ -6,23 +6,23 @@ namespace RestASPNET.Api.Services;
 
 public class PersonService : IPersonService
 {
-    private readonly RestContext _context;
+    private readonly MSSQLContext _context;
 
-    public PersonService(RestContext restContext)
+    public PersonService(MSSQLContext restContext)
     {
         _context = restContext;
     }
 
     public List<Person> FindAll()
     {
-         var listaPessoas = _context.People.ToList();
+         var listaPessoas = _context.Persons.ToList();
 
          return listaPessoas;
     }
 
     public Person FindById(int id)
     {
-        var pessoaRecuperada = _context.People.FirstOrDefault(x => x.Id == id);
+        var pessoaRecuperada = _context.Persons.FirstOrDefault(x => x.Id == id);
         
         if (pessoaRecuperada is null)
         {
