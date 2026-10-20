@@ -7,7 +7,6 @@ namespace RestASPNET.Api.Extensions;
 
 public static class DatabaseServiceCollectionExtensions
 {
-
     public static IServiceCollection AddDatabaseConfiguration(
         this IServiceCollection services, IConfiguration configuration)
     {
@@ -28,7 +27,6 @@ public static class DatabaseServiceCollectionExtensions
         );
     });
 });
-
         return services;
     }
 }

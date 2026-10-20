@@ -16,4 +16,16 @@ public class Person
         Address = address;
         Gender = gender;
     }
+
+    public void AtualizarDados(
+    string firstName,
+    string lastName,
+    string address,
+    string gender)
+{
+    FirstName = firstName;
+    LastName = lastName;
+    Address = address;
+    Gender = gender;
+}
 }

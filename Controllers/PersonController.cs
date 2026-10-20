@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using RestASPNET.Api.Model;
+using RestASPNET.Api.DTO;
 using RestASPNET.Api.Services;
 
 namespace RestASPNET.Api.Controllers;
@@ -16,7 +16,7 @@ public class PersonController : ControllerBase
     }
 
     [HttpGet]
-    public ActionResult<IEnumerable<Person>> FindAll()
+    public ActionResult<IEnumerable<PersonResponse>> FindAll()
     {
         var pessoas = _personService.FindAll();
 
@@ -24,7 +24,7 @@ public class PersonController : ControllerBase
     }
 
     [HttpGet("{id}")]
-    public ActionResult<Person> FindById(int id)
+    public ActionResult<PersonResponse> FindById(int id)
     {
         var pessoa = _personService.FindById(id);
 
@@ -34,5 +34,40 @@ public class PersonController : ControllerBase
         }
 
         return Ok(pessoa);
+    }
+
+    [HttpPost]
+    public ActionResult<PersonResponse> CreatePerson([FromBody] PersonRequest request)
+    {
+        var response = _personService.Create(request);
+
+        return CreatedAtAction(nameof(FindById), new {id = response.Id}, response);
+    }
+
+    
+    [HttpPut("{id}")]
+    public ActionResult<PersonResponse> UpdatePerson(int id, [FromBody] PersonRequest request)
+    {
+        var response = _personService.Update(id, request);
+
+        if (response is null)
+        {
+            return NotFound();
+        }
+
+        return Ok(response);
+    }
+
+    [HttpDelete("{id}")]
+    public IActionResult Delete(int id)
+    {
+        var item = _personService.Delete(id);
+
+        if(item == null)
+        {
+            return NotFound();
+        }
+
+        return NoContent();
     }
 }
