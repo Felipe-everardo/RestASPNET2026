@@ -30,14 +30,14 @@ public class PersonController : ControllerBase
 
         if (pessoa is null)
         {
-            return BadRequest();
+            return NotFound();
         }
 
         return Ok(pessoa);
     }
 
     [HttpPost]
-    public ActionResult<PersonResponse> CreatePerson([FromBody] PersonRequest request)
+    public ActionResult<PersonResponse> Create([FromBody] PersonRequest request)
     {
         var response = _personService.Create(request);
 
@@ -46,7 +46,7 @@ public class PersonController : ControllerBase
 
     
     [HttpPut("{id}")]
-    public ActionResult<PersonResponse> UpdatePerson(int id, [FromBody] PersonRequest request)
+    public ActionResult<PersonResponse> Update(int id, [FromBody] PersonRequest request)
     {
         var response = _personService.Update(id, request);
 
@@ -61,12 +61,7 @@ public class PersonController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
-        var item = _personService.Delete(id);
-
-        if(item == null)
-        {
-            return NotFound();
-        }
+         _personService.Delete(id);
 
         return NoContent();
     }

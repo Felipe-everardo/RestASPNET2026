@@ -22,10 +22,15 @@ public class Person
     string lastName,
     string address,
     string gender)
-{
-    FirstName = firstName;
-    LastName = lastName;
-    Address = address;
-    Gender = gender;
-}
+    {
+        FirstName = firstName;
+        LastName = lastName;
+        Address = address;
+        Gender = gender;
+    }
+
+    public override string ToString()
+    {
+        return $"Id: {Id}, FirstName: {FirstName}, LastName: {LastName}, Address: {Address}, Gender: {Gender}";
+    }
 }

@@ -1,17 +1,14 @@
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+﻿namespace RestASPNET.Api.Repositories.Impl;
 using RestASPNET.Api.Data;
 using RestASPNET.Api.DTO;
 using RestASPNET.Api.Exceptions;
 using RestASPNET.Api.Model;
 
-namespace RestASPNET.Api.Services;
-
-public class PersonService : IPersonService
+public class PersonRepositoryImpl : IPersonRepository
 {
     private readonly MSSQLContext _context;
 
-    public PersonService(MSSQLContext restContext)
+    public PersonRepositoryImpl(MSSQLContext restContext)
     {
         _context = restContext;
     }
@@ -19,7 +16,6 @@ public class PersonService : IPersonService
     public List<PersonResponse> FindAll()
     {
         var listaPessoas = _context.Persons.ToList();
-
         return listaPessoas.Select(p => ToResponse(p)).ToList();
     }
 
@@ -37,6 +33,7 @@ public class PersonService : IPersonService
 
     public PersonResponse Create(PersonRequest request)
     {
+
         var person = new Person(
             id: 0,
             firstName: request.FirstName,
@@ -46,7 +43,6 @@ public class PersonService : IPersonService
 
         _context.Persons.Add(person);
         _context.SaveChanges();
-
         return ToResponse(person);
     }
 
@@ -55,11 +51,8 @@ public class PersonService : IPersonService
     {
         var person = _context.Persons.FirstOrDefault(x => x.Id == id);
 
-        if (person is null)
-        {
-            return null;
-        }
-
+        if (person is null) return null;
+        
         person.AtualizarDados
         (
             request.FirstName,
@@ -71,21 +64,17 @@ public class PersonService : IPersonService
         _context.SaveChanges();
 
         return ToResponse(person);
-
     }
 
-    public Person? Delete(int id)
+    public void Delete(int id)
     {
         var item = _context.Persons.Find(id);
         if (item == null)
         {
-            return null;
+            throw new NotFoundException("Id não encontrado.");
         }
         _context.Persons.Remove(item);
-
         _context.SaveChanges();
-
-        return item;
     }
 
     private static PersonResponse ToResponse(Person person)
@@ -99,4 +88,5 @@ public class PersonService : IPersonService
             Gender = person.Gender
         };
     }
+
 }
