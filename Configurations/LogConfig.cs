@@ -1,7 +1,6 @@
 using Serilog;
 
 namespace RestASPNET.Api.Configurations;
-
 public static class LoggingConfig
 {
     public static void AddSerilogLogging(this WebApplicationBuilder builder)

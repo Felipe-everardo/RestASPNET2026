@@ -1,7 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using RestASPNET.Api.Data;
+using RestASPNET.Api.Model.Context;
 
 namespace RestASPNET.Api.Extensions;
 

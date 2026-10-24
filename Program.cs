@@ -14,6 +14,7 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 builder.Services.AddDatabaseConfiguration(builder.Configuration);
+builder.Services.AddEvolveConfiguration(builder.Configuration, builder.Environment);
 
 builder.Services.AddScoped<IPersonRepository, PersonRepositoryImpl>();
 builder.Services.AddScoped<IPersonService, PersonServiceImpl>();

@@ -6,20 +6,26 @@ namespace RestASPNET.Api.Services.Impl;
 public class PersonServiceImpl : IPersonService
 {
     private readonly IPersonRepository _repository;
+    private readonly ILogger<PersonServiceImpl> _logger;
 
-    public PersonServiceImpl(IPersonRepository repository)
+    public PersonServiceImpl(IPersonRepository repository, ILogger<PersonServiceImpl> logger)
     {
         _repository = repository;
+        _logger = logger;
     }
 
     public List<PersonResponse> FindAll()
     {
-        return _repository.FindAll();
+        var persons = _repository.FindAll();
+        _logger.LogInformation("Retrieved {Count} persons from the repository.", persons.Count);
+        return persons;
     }
 
     public PersonResponse FindById(int id)
     {
-        return _repository.FindById(id);
+        var person = _repository.FindById(id);
+        _logger.LogInformation("Retrieving person with ID {Id} from the repository.", id);
+        return person;
     }
 
 

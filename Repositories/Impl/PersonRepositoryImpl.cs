@@ -1,8 +1,9 @@
 ﻿namespace RestASPNET.Api.Repositories.Impl;
-using RestASPNET.Api.Data;
+
 using RestASPNET.Api.DTO;
 using RestASPNET.Api.Exceptions;
 using RestASPNET.Api.Model;
+using RestASPNET.Api.Model.Context;
 
 public class PersonRepositoryImpl : IPersonRepository
 {

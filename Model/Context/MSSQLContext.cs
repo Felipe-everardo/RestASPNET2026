@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using RestASPNET.Api.Model;
 
-namespace RestASPNET.Api.Data;
+namespace RestASPNET.Api.Model.Context;
 
 public class MSSQLContext : DbContext
 {
